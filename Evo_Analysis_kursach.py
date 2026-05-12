@@ -51,11 +51,15 @@ for gen in range(GENERATIONS):
     stats['D'].append(POP_SIZE - hawks)  # проще, чем считать отдельно
     
 end = time.time()
-print(f" Время выполнения: {end - start:.2f} секунд")
+
+theory_hawks = POP_SIZE * V / C
+theory_doves = POP_SIZE * (C - V) / C    
+
 plt.figure(figsize=(10, 5))
 plt.plot(stats['H'], label='Ястребы (H)', color='red', linewidth=2)
 plt.plot(stats['D'], label='Голуби (D)', color='skyblue', linewidth=2)
-plt.axhline(y=V*C/(V+C), color='gray', linestyle='--', label=f'Теория: {V*C/(V+C):.1f}')
+plt.axhline(y=theory_hawks, color='gray', linestyle='--', label=f'Теория (ЭСС): {theory_hawks:.0f}')
+plt.axhline(y=theory_doves, color='gray', linestyle='--', label=f'Теория (ЭСС): {theory_doves:.0f}')
 plt.xlabel('Поколение', fontsize=12)
 plt.ylabel('Количество особей', fontsize=12)
 plt.title(' Эволюционная игра "Ястребы и Голуби"', fontsize=14)
